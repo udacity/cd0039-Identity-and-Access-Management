@@ -1,22 +1,21 @@
-# Purpose of This Directory
+# Flask Recap
 
-This directory should contain any files and instructions necessary for exercises created for this lesson.
+A simple flask server to demonstrate basic flask.
 
-## Folder Structure
+## Getting Started
 
-Each exercise should be contained in its own folder using the naming convention of `concept#-name-of-concept`. See example below:
+### Create a Virutal Enviornment
 
-```
-exercises
-    |_ concept1-hello-world
-    |   |_ starter
-    |   |   |_ exercise-files
-    |   |_ solution
-    |   |   |_ solution_files
-    |_ concept2-foo-bar
-    |   |_ starter
-    |   |   |_ exercise-files
-    |   |_ solution
-    |   |   |_ solution_files
-    |_ README.md
-```
+Follow instructions [here](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/) to create and activate virtual enviornment for this project.
+
+### Install Dependencies
+
+Run `pip install -r requirements.txt` to install any dependencies.
+
+### Install Postman
+
+Follow instructions on the [Postman docs](https://www.getpostman.com/) to install and run postman. Once postman is running, import the collection `./udacity-fsnd-flaskrecap.postman_collection.json`.
+
+### Run the Server
+
+On first run, execute `export FLASK_APP=FlaskRecap.py`. Then run `flask run --reload` to run the developer server.
