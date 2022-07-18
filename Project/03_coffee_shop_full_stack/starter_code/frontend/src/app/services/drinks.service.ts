@@ -1,27 +1,26 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
-import { AuthService } from './auth.service';
-import { environment } from 'src/environments/environment';
+import { AuthService } from "./auth.service";
+import { environment } from "src/environments/environment";
 
 export interface Drink {
   id: number;
   title: string;
   recipe: Array<{
-          name: string,
-          color: string,
-          parts: number
-        }>;
+    name: string;
+    color: string;
+    parts: number;
+  }>;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class DrinksService {
-
   url = environment.apiServerUrl;
 
-  public items: {[key: number]: Drink} = {};
+  public items: { [key: number]: Drink } = {};
   // = {
   //                             1: {
   //                             id: 1,
@@ -79,62 +78,66 @@ export class DrinksService {
   //                           }
   //   };
 
-
-  constructor(private auth: AuthService, private http: HttpClient) { }
+  constructor(private auth: AuthService, private http: HttpClient) {}
 
   getHeaders() {
     const header = {
-      headers: new HttpHeaders()
-        .set('Authorization',  `Bearer ${this.auth.activeJWT()}`)
+      headers: new HttpHeaders().set(
+        "Authorization",
+        `Bearer ${this.auth.activeJWT()}`
+      ),
     };
     return header;
   }
 
   getDrinks() {
-    if (this.auth.can('get:drinks-detail')) {
-      this.http.get(this.url + '/drinks-detail', this.getHeaders())
-      .subscribe((res: any) => {
-        this.drinksToItems(res.drinks);
-        console.log(res);
-      });
+    if (this.auth.can("get:drinks-detail")) {
+      this.http
+        .get(this.url + "/drinks-detail", this.getHeaders())
+        .subscribe((res: any) => {
+          this.drinksToItems(res.drinks);
+          console.log("r", res, this.auth.activeJWT());
+        });
     } else {
-      this.http.get(this.url + '/drinks', this.getHeaders())
-      .subscribe((res: any) => {
-        this.drinksToItems(res.drinks);
-        console.log(res);
-      });
+      this.http
+        .get(this.url + "/drinks", this.getHeaders())
+        .subscribe((res: any) => {
+          this.drinksToItems(res.drinks);
+          console.log("r", res, res.drinks);
+        });
     }
-
   }
 
   saveDrink(drink: Drink) {
-    if (drink.id >= 0) { // patch
-      this.http.patch(this.url + '/drinks/' + drink.id, drink, this.getHeaders())
-      .subscribe( (res: any) => {
-        if (res.success) {
-          this.drinksToItems(res.drinks);
-        }
-      });
-    } else { // insert
-      this.http.post(this.url + '/drinks', drink, this.getHeaders())
-      .subscribe( (res: any) => {
-        if (res.success) {
-          this.drinksToItems(res.drinks);
-        }
-      });
+    if (drink.id >= 0) {
+      // patch
+      this.http
+        .patch(this.url + "/drinks/" + drink.id, drink, this.getHeaders())
+        .subscribe((res: any) => {
+          if (res.success) {
+            this.drinksToItems(res.drinks);
+          }
+        });
+    } else {
+      // insert
+      this.http
+        .post(this.url + "/drinks", drink, this.getHeaders())
+        .subscribe((res: any) => {
+          if (res.success) {
+            this.drinksToItems(res.drinks);
+          }
+        });
     }
-
   }
 
   deleteDrink(drink: Drink) {
     delete this.items[drink.id];
-    this.http.delete(this.url + '/drinks/' + drink.id, this.getHeaders())
-    .subscribe( (res: any) => {
-
-    });
+    this.http
+      .delete(this.url + "/drinks/" + drink.id, this.getHeaders())
+      .subscribe((res: any) => {});
   }
 
-  drinksToItems( drinks: Array<Drink>) {
+  drinksToItems(drinks: Array<Drink>) {
     for (const drink of drinks) {
       this.items[drink.id] = drink;
     }
