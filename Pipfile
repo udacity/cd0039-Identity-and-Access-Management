@@ -1,0 +1,33 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+click = "*"
+flask = "*"
+itsdangerous = "*"
+jinja2 = "*"
+markupsafe = "*"
+werkzeug = "*"
+jose = "*"
+python-jose = "*"
+cryptography = "*"
+astroid = "*"
+ecdsa = "*"
+flask-sqlalchemy = "*"
+future = "*"
+lazy-object-proxy = "*"
+mccabe = "*"
+pycryptodome = "*"
+pylint = "*"
+six = "*"
+typed-ast = "*"
+wrapt = "*"
+flask-cors = "*"
+
+[dev-packages]
+ipykernel = "*"
+
+[requires]
+python_version = "3.10"
