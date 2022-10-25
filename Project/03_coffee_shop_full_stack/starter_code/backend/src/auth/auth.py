@@ -5,7 +5,7 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'fsnd-tota.us.auth0.com' 
+AUTH0_DOMAIN = 'dev-7wl0xelsvzknetbq.us.auth0.com' 
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'http://localhost:5000'
 
