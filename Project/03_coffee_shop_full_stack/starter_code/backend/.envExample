@@ -1,0 +1,3 @@
+AUTH0_DOMAIN=auth0_domain
+AUTH0_ALGORITHMS='RS256'
+AUTH0_API_AUDIENCE=auth0_api_audience
